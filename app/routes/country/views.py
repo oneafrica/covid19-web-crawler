@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 from . import country_blueprint
 from ...utils import fill_country_object
-
+from ...utils import countries_map
 
 @country_blueprint.route('/country/<country>')
 def get_info_by_country(country):
@@ -43,4 +43,24 @@ def get_countries_list():
 
         country = cols[0]
         countries.append(country)
+    return {'countries ': countries}
+
+@country_blueprint.route('/africa-countries')
+def get_african_countries_list():
+    response = requests.get(
+        'https://www.worldometers.info/coronavirus/').content
+    soup = BeautifulSoup(response, 'html.parser')
+
+    countries = []
+
+    tbody = soup.find('tbody')
+    rows = tbody.find_all('tr')
+
+    for row in rows:
+        cols = row.find_all('td')
+        cols = [x.text.strip() for x in cols]
+
+        country = cols[0]
+        if country in countries_map:
+            countries.append(country)
     return {'countries ': countries}

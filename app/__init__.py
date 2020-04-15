@@ -7,6 +7,7 @@ from app.routes.statistics import statistics_blueprint
 from app.routes.yesterday import yesterday_blueprint
 from app.routes.home import home_blueprint
 from app.utils import fill_country_object
+from app.utils import fill_african_country_object
 
 app = Flask(__name__)
 
