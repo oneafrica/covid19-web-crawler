@@ -45,7 +45,7 @@ def get_countries_list():
         countries.append(country)
     return {'countries ': countries}
 
-@country_blueprint.route('/africa-countries')
+@country_blueprint.route('/api/v1/africa-countries')
 def get_african_countries_list():
     response = requests.get(
         'https://www.worldometers.info/coronavirus/').content
@@ -63,4 +63,4 @@ def get_african_countries_list():
         country = cols[0]
         if country in countries_map:
             countries.append(country)
-    return {'countries ': countries}
+    return {'countries': countries}

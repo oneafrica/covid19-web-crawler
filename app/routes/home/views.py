@@ -5,6 +5,8 @@ from ...utils import fill_african_country_object, countries_map
 
 from . import home_blueprint
 
+from flask import current_app
+
 @home_blueprint.route('/')
 def home():
     response = requests.get(
@@ -35,7 +37,7 @@ def home():
             'activeCasesSeriousCondition': activeCasesSeriousCondition}
 
 
-@home_blueprint.route('/africa')
+@home_blueprint.route('/api/v1/africa')
 def africa():
     response = requests.get(
         'https://www.worldometers.info/coronavirus/').content
@@ -85,3 +87,12 @@ def africa():
             'closedCases': str(format(closedCases, ',d')), 'countries': countries, 'lastUpdate': lastUpdate, 'activeCases': str(format(activeCases, ',d')),
             'activeCasesMildCondition': str(format(activeCasesMildCondition, ',d')),
             'activeCasesSeriousCondition': str(format(activeCasesSeriousCondition, ',d'))}
+
+@home_blueprint.route('/api/v1/africa-cdc')
+def africacdc():
+    response = requests.get('https://africacdc.org/covid-19/').content
+    soup = BeautifulSoup(response, 'html.parser')
+
+    current_app.logger.info(soup)
+
+    return soup
