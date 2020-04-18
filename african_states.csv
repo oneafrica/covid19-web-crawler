@@ -30,12 +30,14 @@
 41,MG,Madagascar
 45,ML,Mali
 51,MR,Mauritania
+<-55,MU,Mauritius
 48,MW,Malawi
 54,MZ,Mozambique
 12,NA,Namibia
 13,NE,Niger
 14,NG,Nigeria
 9,RW,Rwanda
+56,SC,Seychelles
 53,SD,Sudan
 29,SL,Sierra Leone
 50,SN,Senegal
@@ -48,7 +50,7 @@
 15,TN,Tunisia
 10,TZ,Tanzania
 52,UG,Uganda
-37,XS,Somaliland
+->37,XS,Somaliland
 5,ZA,South Africa
 24,ZM,Zambia
 18,ZW,Zimbabwe

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from ...utils import fill_country_object
-from ...utils import fill_african_country_object, countries_map
+from ...utils import fill_african_country_object, fill_african_country_pop_object, countries_map
 
 from . import home_blueprint
 
@@ -96,3 +96,17 @@ def africacdc():
     current_app.logger.info(soup)
 
     return soup
+
+@home_blueprint.route('/api/v1/africa_pop')
+def africa_pop():
+    response = requests.get('https://www.worldometers.info/population/countries-in-africa-by-population/').content
+    soup = BeautifulSoup(response, 'html.parser')
+    tbody = soup.find('tbody')
+    rows = tbody.find_all('tr')
+
+    countriesPop = fill_african_country_pop_object(rows)
+
+    current_app.logger.info(len(countriesPop))
+
+    return {'countries': countriesPop};
+
